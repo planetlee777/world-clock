@@ -1,3 +1,5 @@
+let cityUpdateInterval; // Declare a variable to hold the interval ID
+
 function updateTime() {
 	// Los Angeles
 	let losAngelesElement = document.querySelector("#los-angeles");
@@ -34,6 +36,9 @@ function updateTime() {
 }
 
 function updateCity(event) {
+	// Clear any existing city update interval
+	clearInterval(cityUpdateInterval);
+
 	let cityTimeZone = event.target.value;
 
 	// Handle current location
@@ -47,20 +52,20 @@ function updateCity(event) {
 
 	// Display selected city time
 	citiesElement.innerHTML = `
-    <div class="city">
-      <div>
-        <h2>${cityName}</h2>
-        <div class="date">${cityTime.format("MMMM Do YYYY")}</div>
-      </div>
-      <div class="time">${cityTime.format(
-				"h:mm:ss"
-			)} - <small>${cityTime.format("A")}</small></div>
-    </div>
-    <a href="index.html">All Cities</a>
-  `;
+        <div class="city">
+            <div>
+                <h2>${cityName}</h2>
+                <div class="date">${cityTime.format("MMMM Do YYYY")}</div>
+            </div>
+            <div class="time">${cityTime.format(
+							"h:mm:ss"
+						)} - <small>${cityTime.format("A")}</small></div>
+        </div>
+        <a href="index.html">All Cities</a>
+    `;
 
-	// Keep updating the time for the selected city
-	setInterval(function () {
+	// Start updating the time for the selected city
+	cityUpdateInterval = setInterval(function () {
 		let updatedCityTime = moment().tz(cityTimeZone);
 		citiesElement.querySelector(".date").innerHTML =
 			updatedCityTime.format("MMMM Do YYYY");
