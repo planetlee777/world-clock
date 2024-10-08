@@ -7,9 +7,7 @@ function updateTime() {
 		let losAngelesTime = moment().tz("America/Los_Angeles");
 
 		losAngelesDateElement.innerHTML = losAngelesTime.format("MMMM Do YYYY");
-		losAngelesTimeElement.innerHTML = losAngelesTime.format(
-			"h:mm:ss [<small>]A[</small>]"
-		);
+		losAngelesTimeElement.innerHTML = losAngelesTime.format("h:mm:ss - A");
 	}
 
 	// Paris
@@ -20,9 +18,18 @@ function updateTime() {
 		let parisTime = moment().tz("Europe/Paris");
 
 		parisDateElement.innerHTML = parisTime.format("MMMM Do YYYY");
-		parisTimeElement.innerHTML = parisTime.format(
-			"h:mm:ss [<small>]A[</small>]"
-		);
+		parisTimeElement.innerHTML = parisTime.format("h:mm:ss - A");
+	}
+
+	// Tokyo
+	let tokyoElement = document.querySelector("#tokyo");
+	if (tokyoElement) {
+		let tokyoDateElement = tokyoElement.querySelector(".date");
+		let tokyoTimeElement = tokyoElement.querySelector(".time");
+		let tokyoTime = moment().tz("Asia/Tokyo");
+
+		tokyoDateElement.innerHTML = tokyoTime.format("MMMM Do YYYY");
+		tokyoTimeElement.innerHTML = tokyoTime.format("h:mm:ss - A");
 	}
 }
 
@@ -31,7 +38,7 @@ function updateCity(event) {
 
 	// Handle current location
 	if (cityTimeZone === "current") {
-		cityTimeZone = moment.tz.guess(); // Get user's current timezone
+		cityTimeZone = moment.tz.guess();
 	}
 
 	let cityName = cityTimeZone.replace("_", " ").split("/")[1];
@@ -45,9 +52,9 @@ function updateCity(event) {
         <h2>${cityName}</h2>
         <div class="date">${cityTime.format("MMMM Do YYYY")}</div>
       </div>
-      <div class="time">${cityTime.format("h:mm:ss")} <small>${cityTime.format(
-		"A"
-	)}</small></div>
+      <div class="time">${cityTime.format(
+				"h:mm:ss"
+			)} - <small>${cityTime.format("A")}</small></div>
     </div>
     <a href="index.html">All Cities</a>
   `;
@@ -59,7 +66,7 @@ function updateCity(event) {
 			updatedCityTime.format("MMMM Do YYYY");
 		citiesElement.querySelector(".time").innerHTML = `${updatedCityTime.format(
 			"h:mm:ss"
-		)} <small>${updatedCityTime.format("A")}</small>`;
+		)} - <small>${updatedCityTime.format("A")}</small>`;
 	}, 1000);
 }
 
