@@ -1,5 +1,3 @@
-let selectedCityInterval; // To store the interval for the selected city
-
 function updateTime() {
 	// Los Angeles
 	let losAngelesElement = document.querySelector("#los-angeles");
@@ -31,46 +29,44 @@ function updateTime() {
 function updateCity(event) {
 	let cityTimeZone = event.target.value;
 
-	// If the "current" option is selected, guess the local timezone
+	// Handle current location
 	if (cityTimeZone === "current") {
-		cityTimeZone = moment.tz.guess();
+		cityTimeZone = moment.tz.guess(); // Get user's current timezone
 	}
 
-	// Clear the previous interval to avoid multiple intervals running
-	if (selectedCityInterval) clearInterval(selectedCityInterval);
-
-	// Get the city name and time
 	let cityName = cityTimeZone.replace("_", " ").split("/")[1];
+	let cityTime = moment().tz(cityTimeZone);
 	let citiesElement = document.querySelector("#cities");
 
-	// Function to update the selected city's time
-	function updateSelectedCityTime() {
-		let cityTime = moment().tz(cityTimeZone);
-		citiesElement.innerHTML = `
-      <div class="city">
-        <div>
-          <h2>${cityName}</h2>
-          <div class="date">${cityTime.format("MMMM Do YYYY")}</div>
-        </div>
-        <div class="time">${cityTime.format(
-					"h:mm:ss"
-				)} <small>${cityTime.format("A")}</small></div>
+	// Display selected city time
+	citiesElement.innerHTML = `
+    <div class="city">
+      <div>
+        <h2>${cityName}</h2>
+        <div class="date">${cityTime.format("MMMM Do YYYY")}</div>
       </div>
-      <a href="index.html">All Cities</a>
-      `;
-	}
+      <div class="time">${cityTime.format("h:mm:ss")} <small>${cityTime.format(
+		"A"
+	)}</small></div>
+    </div>
+    <a href="index.html">All Cities</a>
+  `;
 
-	// Call it once to update immediately
-	updateSelectedCityTime();
-
-	// Then set an interval to update every second
-	selectedCityInterval = setInterval(updateSelectedCityTime, 1000);
+	// Keep updating the time for the selected city
+	setInterval(function () {
+		let updatedCityTime = moment().tz(cityTimeZone);
+		citiesElement.querySelector(".date").innerHTML =
+			updatedCityTime.format("MMMM Do YYYY");
+		citiesElement.querySelector(".time").innerHTML = `${updatedCityTime.format(
+			"h:mm:ss"
+		)} <small>${updatedCityTime.format("A")}</small>`;
+	}, 1000);
 }
 
-// Update Los Angeles and Paris initially
+// Initial time update for fixed cities
 updateTime();
-setInterval(updateTime, 1000); // Update every second
+setInterval(updateTime, 1000); // Update time every second
 
-// Handle city selection change
+// Add event listener for city selection
 let citiesSelectElement = document.querySelector("#city");
 citiesSelectElement.addEventListener("change", updateCity);
