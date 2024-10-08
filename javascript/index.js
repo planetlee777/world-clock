@@ -21,5 +21,13 @@ function updateTime() {
 	)}`;
 }
 
+function updateCity() {
+	let cityTimeZone = event.target.value;
+}
+
 updateTime();
 setInterval(updateTime, 1000);
+
+let citiesSelectElement = document.querySelector("#city");
+
+citiesSelectElement.addEventLister("change, updateCity");
