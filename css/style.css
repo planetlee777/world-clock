@@ -1,5 +1,6 @@
 body {
 	background-color: #f9f7fe;
+	font-family: sans-serif;
 }
 
 h1 {
@@ -32,4 +33,26 @@ select {
 
 .city {
 	display: flex;
+	margin: 20px 0;
+	justify-content: space-between;
+}
+
+h2 {
+	margin: 0 0 0 5px;
+	font-size: 30px;
+}
+
+.date {
+	opacity: 0.7;
+}
+
+.time {
+	font-size: 40px;
+	font-weight: bold;
+}
+
+small .time {
+	font-size: 18px;
+	line-height: 36px;
+	vertical-align: middle;
 }
