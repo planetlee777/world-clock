@@ -47,11 +47,12 @@ h2 {
 }
 
 .time {
-	font-size: 40px;
+	font-size: 38px;
 	font-weight: bold;
 }
 
 small .time {
+	display: flex;
 	font-size: 18px;
 	line-height: 36px;
 	vertical-align: middle;
