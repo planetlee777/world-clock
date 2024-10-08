@@ -1,8 +1,11 @@
+setInterval(function)
+
 //los angeles
 let losAngelesElement = document.querySelector("#los-angeles");
 let losAngelesDateElement = losAngelesElement.querySelector(".date");
 let losAngelesTimeElement = losAngelesElement.querySelector(".time");
 let losAngelesTime = moment().tz("America/Los_Angeles");
+
 
 losAngelesDateElement.innerHTML = losAngelesTime.format("MMM Do YYYY");
 losAngelesTimeElement.innerHTML = `${losAngelesTime.format(
