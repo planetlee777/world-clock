@@ -15,7 +15,7 @@ let parisDateElement = parisElement.querySelector(".date");
 let parisTimeElement = parisElement.querySelector(".time");
 let parisTime = moment().tz("Europe/Paris");
 
-parisElement.innerHTML = parisTime.format("MMM Do YYYY");
+parisDateElement.innerHTML = parisTime.format("MMM Do YYYY");
 parisTimeElement.innerHTML = `${parisTime.format(
 	"h:mm:ss [<small>]A[</small>]"
 )}`;
