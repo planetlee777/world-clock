@@ -1,16 +1,15 @@
-setInterval(function)
+setInterval(function () {
+	//los angeles
+	let losAngelesElement = document.querySelector("#los-angeles");
+	let losAngelesDateElement = losAngelesElement.querySelector(".date");
+	let losAngelesTimeElement = losAngelesElement.querySelector(".time");
+	let losAngelesTime = moment().tz("America/Los_Angeles");
 
-//los angeles
-let losAngelesElement = document.querySelector("#los-angeles");
-let losAngelesDateElement = losAngelesElement.querySelector(".date");
-let losAngelesTimeElement = losAngelesElement.querySelector(".time");
-let losAngelesTime = moment().tz("America/Los_Angeles");
-
-
-losAngelesDateElement.innerHTML = losAngelesTime.format("MMM Do YYYY");
-losAngelesTimeElement.innerHTML = `${losAngelesTime.format(
-	"h:mm:ss [<small>]A[</small>]"
-)}`;
+	losAngelesDateElement.innerHTML = losAngelesTime.format("MMM Do YYYY");
+	losAngelesTimeElement.innerHTML = `${losAngelesTime.format(
+		"h:mm:ss [<small>]A[</small>]"
+	)}`;
+}, 1000);
 
 //paris
 let parisElement = document.querySelector("#paris");
